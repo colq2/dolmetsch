@@ -96,6 +96,23 @@ app(TranslationManager::class)->add('backend', 'app.messages.saved', [
 ]);
 ```
 
+## Laravel Boost
+
+If your app uses [Laravel Boost](https://laravel.com/framework/docs/boost), Dolmetsch ships
+guidelines and an agent skill that Boost picks up automatically:
+
+```bash
+php artisan boost:install     # or: php artisan boost:update --discover
+```
+
+You get two things. A **guideline**, loaded upfront, telling the agent not to hand-edit
+`lang/` and how this package's path addressing works. And a **skill**,
+`dolmetsch-translations`, loaded on demand when a task touches translations — it covers
+searching before adding a key, the add/update split, checking call sites after a move, and
+the group-delete confirmation step.
+
+Nothing here requires Boost. Without it the files are inert.
+
 ## Behaviour worth knowing
 
 - **Locales are not invented.** Writes touch only the locales you pass. Moves and deletes skip locales that lack the key rather than erroring.
