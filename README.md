@@ -113,6 +113,43 @@ the group-delete confirmation step.
 
 Nothing here requires Boost. Without it the files are inert.
 
+## Best practices
+
+The shipped guideline and skill cover mechanics — domains, path addressing, add vs. update.
+They deliberately say nothing about *your* project's conventions, because those vary per app.
+Two things are worth writing down yourself, in a project-level guideline (a Boost custom
+guideline, `CLAUDE.md`, `AGENTS.md`, whatever your agent reads), so an agent doesn't invent
+them fresh every session.
+
+### Structure and naming
+
+Tell the agent how your keys are organised, or it will guess, and every agent guesses
+differently:
+
+- Which domain a given kind of string belongs in (`backend` vs `frontend`, if you split that way)
+- How groups are named and nested — feature-based (`invoices.overdue.subject`) vs
+  screen-based (`dashboard.widgets.title`)
+- Roughly how deep is normal before a key counts as over-nested
+- Where shared strings live versus feature-specific ones (`common.actions.save` vs `invoices.save`)
+
+`search-translation` still catches literal duplicates without this, but near-duplicates with
+different structure — `app.messages.saved` next to `invoices.flash.saved` — slip through.
+
+### Voice and tone
+
+The tools check structure, not wording. Give the agent a short style brief per locale:
+
+- Formality — `Sie` vs `du` in German, formal vs casual English, and whether that shifts by
+  context (marketing copy vs error messages)
+- Sentence style — short and direct, or fuller sentences; contractions allowed or not
+- A small glossary for product nouns that must translate the same way everywhere
+  ("invoice" always → "Rechnung", never "Faktur")
+- Hard rules — brand names left untranslated, no exclamation marks in error messages, and
+  similar
+
+Keep it short. A few bullet points an agent can hold in context beat a full style guide it
+has to go search for.
+
 ## Behaviour worth knowing
 
 - **Locales are not invented.** Writes touch only the locales you pass. Moves and deletes skip locales that lack the key rather than erroring.
