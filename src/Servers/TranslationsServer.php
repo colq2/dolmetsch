@@ -14,8 +14,8 @@ use Laravel\Mcp\Server\Attributes\Name;
 use Laravel\Mcp\Server\Attributes\Version;
 
 #[Name('Translator')]
-#[Version('0.1.0')]
-#[Instructions('Deterministic CRUD + search over translation files (lang/{locale}/*.php and resources/js/Lang/{locale}.json). Always use these tools instead of hand-editing translation files directly, so JSON/PHP structure can never drift out of sync. Use search-translation or get-translation to locate a path before add/update/move/delete.')]
+#[Version('1.0.0')]
+#[Instructions('Deterministic CRUD + search over the translation files of this application, across every domain configured in config/dolmetsch.php (php domains at lang/{locale}/{group}.php, json domains at {path}/{locale}.json). Always use these tools instead of hand-editing translation files directly, so the key structure can never drift between locales. Use search-translation or get-translation to locate a path before add/update/move/delete.')]
 class TranslationsServer extends Server
 {
     protected array $tools = [
